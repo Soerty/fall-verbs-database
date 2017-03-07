@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Упражнения для слова '{{ word.word }}'{% endblock %}
+
+{% block body %}
+<p>Упражнения для слова '{{ word.word }}':</p>
+{% for task in tasks %}
+<p>{{ task|safe }}</p>
+{% endfor %}
+{% endblock %}

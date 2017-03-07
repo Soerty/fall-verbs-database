@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Значения слова '{{ word.word }}'{% endblock %}
+
+
+{% block body %}
+<p>Значения слова '{{ word.word }}':</p>
+
+{% for sense in senses %}
+<p>{{ sense.sense }} ({% for example in sense.examples %}{{ example }};{% endfor %})</p>
+{% endfor %}
+
+{% endblock %}

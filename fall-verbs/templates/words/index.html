@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Список всег глаголов 'Падения'{% endblock %}
+
+{% block body %}
+{% if words %}
+    <ul>
+    {% for word in words %}
+        <li>{{ word.word }} <a href="{% url 'words:senses' word.id %}">значение</a> <a href="{% url 'words:tasks' word.id %}">задания</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
