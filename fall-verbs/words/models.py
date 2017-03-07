@@ -21,6 +21,10 @@ class Sense(models.Model):
         return self.sense
 
 
+    def examples(self):
+        return Example.objects.filter(sense=self)
+
+
 
 class Example(models.Model):
     """Пример значения слова, для одного значения может быть много примеров"""
@@ -34,7 +38,7 @@ class Example(models.Model):
 
 class Task(models.Model):
     """Задания к словам, для одного задания может быть много заданий"""
-    for_word = models.ForeignKey(Word, on_delete=models.CASCADE)
+    word = models.ForeignKey(Word, on_delete=models.CASCADE)
     task = models.TextField()
 
     def __str__(self):
