@@ -1,11 +1,11 @@
 # База данных глаголов падения русского языка
 
-Странная штука.
+Для СРЯ.
 
 
 ### Деплой
 
-Очень надеюсь, что у вас Linux, иначе разбирайтесь сами:
+В Linux
 ```Bash
 $ sudo pip -r requirements
 $ python3 fall-verbs/manage.py runserver
