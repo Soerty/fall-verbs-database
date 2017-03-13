@@ -25,7 +25,6 @@ def senses(request, word_id='1'):
     if word:
         context['word'] = word
         context['senses'] = Sense.objects.filter(word=word.id)
-        print (context['senses'])
 
     return render(request, 'words/sense.html', context)
 

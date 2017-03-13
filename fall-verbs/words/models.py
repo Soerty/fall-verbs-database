@@ -21,7 +21,8 @@ class Sense(models.Model):
         return self.sense
 
 
-    def examples(self):
+    def get_all_examples(self):
+        """Метод возвращает все примеры для данного значения слова"""
         return Example.objects.filter(sense=self)
 
 

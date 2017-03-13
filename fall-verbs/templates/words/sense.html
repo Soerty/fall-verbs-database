@@ -9,7 +9,7 @@
 <p>Значения слова '{{ word.word }}':</p>
 
 {% for sense in senses %}
-<p>{{ sense.sense }} ({% for example in sense.examples %}{{ example }};{% endfor %})</p>
+<p>{{ sense.sense }} ({% for example in sense.get_all_examples %}{{ example }};{% endfor %})</p>
 {% endfor %}
 
 {% endblock %}

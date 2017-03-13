@@ -1,9 +1,37 @@
 <html>
     <head>
         <title>{% block title %}{% endblock %}</title>
+        <style type="text/css">
+            /* Убрать отступы у всех элементов */
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Стили меню */
+            #menu {
+                padding: 1%;
+                background-color: gray;
+            }
+
+            .element {
+                margin-left: 2%;
+                text-decoration: none;
+            }
+
+            .element:hover {
+                color: red;
+            }
+        </style>
     </head>
 
+
+
     <body>
+        <div id="menu">
+            <a href="{% url 'index:index' %}" class="element">Главная</a>
+            <a href="{% url 'words:index' %}" class="element">Список глаголов</a>
+        </div>
         {% block body %}{% endblock %}
     </body>
 </html>
