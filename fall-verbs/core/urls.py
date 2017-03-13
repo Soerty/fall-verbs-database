@@ -8,7 +8,7 @@ import index.views
 
 
 urlpatterns = [
-    url(r'^$', include('index.urls')),
+    url(r'^', include('index.urls')),
     url(r'^words/', include('words.urls')),
     url(r'^admin/', admin.site.urls),
 ]

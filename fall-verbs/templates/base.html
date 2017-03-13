@@ -8,10 +8,14 @@
                 padding: 0;
             }
 
+            body {
+                background-color: wheat;
+            }
+
             /* Стили меню */
             #menu {
                 padding: 1%;
-                background-color: gray;
+                background-color: darkorange ;
             }
 
             .element {
@@ -22,7 +26,20 @@
             .element:hover {
                 color: red;
             }
+
+            /* для отображения строк со словами*/
+            .line {
+                display: block;
+                padding: 1%;
+                background-color: beige;
+                margin: 1%;
+            }
+
+            #content {
+                padding: 1%;
+            }
         </style>
+        {% block style %}{% endblock %}
     </head>
 
 
@@ -32,6 +49,8 @@
             <a href="{% url 'index:index' %}" class="element">Главная</a>
             <a href="{% url 'words:index' %}" class="element">Список глаголов</a>
         </div>
-        {% block body %}{% endblock %}
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
     </body>
 </html>

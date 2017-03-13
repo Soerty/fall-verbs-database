@@ -5,11 +5,19 @@
 {% block title %}Значения слова '{{ word.word }}'{% endblock %}
 
 
-{% block body %}
-<p>Значения слова '{{ word.word }}':</p>
+{% block style %}
+    <style type="text/css">
+        #meaning {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
 
-{% for sense in senses %}
-<p>{{ sense.sense }} ({% for example in sense.get_all_examples %}{{ example }};{% endfor %})</p>
-{% endfor %}
 
+{% block content %}
+    <p id="meaning">Значения слова '{{ word.word }}':</p>
+
+    {% for sense in senses %}
+        <p class="line">{{ sense.sense }} ({% for example in sense.get_all_examples %}{{ example }};{% endfor %})</p>
+    {% endfor %}
 {% endblock %}

@@ -4,12 +4,29 @@
 
 {% block title %}Список всег глаголов 'Падения'{% endblock %}
 
-{% block body %}
-{% if words %}
-    <ul>
-    {% for word in words %}
-        <li>{{ word.word }} <a href="{% url 'words:senses' word.id %}">значение</a> <a href="{% url 'words:tasks' word.id %}">задания</a></li>
-    {% endfor %}
-    </ul>
-{% endif %}
+
+{% block style %}
+    <style type="text/css">
+        .element_links {
+            padding-left: 2%;
+            text-decoration: none;
+        }
+
+        .element_links:hover {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {# Если есть слова в базе данных, то вывести их #}
+    {% if words %}
+        {% for word in words %}
+            <p class="line">
+                <span>{{ word.word }}</span>
+                <a href="{% url 'words:senses' word.id %}" class="element_links">значение</a>
+                <a href="{% url 'words:tasks' word.id %}" class="element_links">задания</a>
+            </p>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
