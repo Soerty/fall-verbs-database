@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Список слов с приставкой '{{ pref.pref }}'{% endblock %}
+
+
+{% block style %}
+    <style type="text/css">
+        #meaning {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <p id="meaning">Список слов с приставкой '{{ pref.pref }}':</p>
+
+    {% for word in wordlist %}
+     <p class="line"> <a href="{% url 'words:senses' word.id %}" class="element_links">{{ word.word }}</a>
+            {% endfor %}</p>
+
+{% endblock %}

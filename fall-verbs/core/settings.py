@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'index.apps.IndexConfig',
     'words.apps.WordsConfig',
+    'prefs.apps.PrefsConfig',
 ]
 
 

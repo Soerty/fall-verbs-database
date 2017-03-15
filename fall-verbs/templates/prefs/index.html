@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}База данных глаголов падения{% endblock %}
+
+
+{% block style %}
+    <style type="text/css">
+        .element_links {
+            padding-left: 2%;
+            text-decoration: none;
+        }
+
+        .element_links:hover {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {# Если есть слова в базе данных, то вывести их #}
+    {% if prefs %}
+        {% for pref in prefs %}
+            <p class="line">
+                <a href="{% url 'prefs:wordlist' pref.id %}" class="element_links">{{ pref.pref }}</a>
+            </p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

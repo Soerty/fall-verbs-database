@@ -1,11 +1,11 @@
 from django.db import models
-
-
+from prefs.models import Pref
 
 
 class Word(models.Model):
     """Модель описывающая слово"""
     word = models.CharField(max_length=64)
+    pref = models.ForeignKey(Pref, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.word

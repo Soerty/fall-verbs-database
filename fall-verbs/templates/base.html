@@ -48,6 +48,8 @@
         <div id="menu">
             <a href="{% url 'index:index' %}" class="element">Главная</a>
             <a href="{% url 'words:index' %}" class="element">Список глаголов</a>
+            <a href="{% url 'prefs:index' %}" class="element">Список приставок</a>
+
         </div>
         <div id="content">
             {% block content %}{% endblock %}
