@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'index.apps.IndexConfig',
     'words.apps.WordsConfig',
     'prefs.apps.PrefsConfig',
+    'classes.apps.ClassesConfig',
 ]
 
 

@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^words/', include('words.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^prefs/', include('prefs.urls')),
+    url(r'^classes/', include('classes.urls')),
+
 ]

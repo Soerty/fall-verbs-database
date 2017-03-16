@@ -2,7 +2,7 @@
 
 
 
-{% block title %}Список приставок{% endblock %}
+{% block title %}Список классов{% endblock %}
 
 
 {% block style %}
@@ -20,10 +20,10 @@
 
 {% block content %}
     {# Если есть слова в базе данных, то вывести их #}
-    {% if prefs %}
-        {% for pref in prefs %}
+    {% if classes %}
+        {% for class in classes %}
             <p class="line">
-                <a href="{% url 'prefs:wordlist' pref.id %}" class="element_links">{{ pref.pref }}</a>
+                <a href="{% url 'classes:wordlist' class.id %}" class="element_links">{{ class.class_name }}</a>
             </p>
         {% endfor %}
     {% endif %}

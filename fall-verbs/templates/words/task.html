@@ -16,7 +16,9 @@
 
 {% block javascript %}
     <script type="text/javascript">
+console.log('foo');
         function check_answer(right_answer, id) {
+			console.log('foo');
             var line = document.getElementById('line_' + id);
             var answer = document.getElementById('select_' + id).value;
             
@@ -40,7 +42,7 @@
             <select id="select_{{ id }}">
                 <option selected="selected"> </option>
                 {% for answer in answers %}
-                    <option value="{{ answer }}" onclick="check_answer('{{ right_answer }}', {{ id }});">{{ answer }}</option>
+                    <option value="{{ answer }}" onClick="check_answer('{{ right_answer }}', {{ id }});">{{ answer }}</option>
                 {% endfor %}
             </select>
             {{ right_part|safe }}

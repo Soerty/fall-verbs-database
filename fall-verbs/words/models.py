@@ -2,6 +2,7 @@ import random
 
 from django.db import models
 from prefs.models import Pref
+from classes.models import Class
 
 
 
@@ -9,6 +10,7 @@ class Word(models.Model):
     """Модель описывающая слово"""
     word = models.CharField(max_length=64)
     pref = models.ForeignKey(Pref, on_delete=models.CASCADE, blank=True, null=True)
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.word
@@ -22,7 +24,6 @@ class Sense(models.Model):
 
     def __str__(self):
         return self.sense
-
 
     def get_all_examples(self):
         """Метод возвращает все примеры для данного значения слова"""

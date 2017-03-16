@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Список слов класса '{{ class.class_name }}'{% endblock %}
+
+
+{% block style %}
+    <style type="text/css">
+        #meaning {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <p id="meaning">Список слов класса '{{ class.class_name }}':</p>
+
+    {% for word in wordlist %}
+     <p class="line"> <a href="{% url 'words:senses' word.id %}" class="element_links">{{ word.word }}</a>
+            {% endfor %}</p>
+
+{% endblock %}
