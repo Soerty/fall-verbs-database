@@ -37,10 +37,12 @@ def tasks(request, word_id='1'):
     tasks = Task.objects.filter(word=word.id)
     random_answers = [task.get_random_answers() for task in tasks]
 
+    index = 0
     all_tasks = []
     for task, answers in zip(tasks, random_answers):
         left_part, right_part = task.task.replace('\r\n', '</br>').split('...')
-        all_tasks.append([left_part, answers, right_part])
+        all_tasks.append([index, task.word.word, left_part, answers, right_part])
+        index += 1
 
     context['word'] = word
     context['tasks'] = all_tasks
