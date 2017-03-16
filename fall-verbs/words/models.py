@@ -1,5 +1,8 @@
+import random
+
 from django.db import models
 from prefs.models import Pref
+
 
 
 class Word(models.Model):
@@ -44,3 +47,12 @@ class Task(models.Model):
 
     def __str__(self):
         return self.task
+
+
+    def get_random_answers(self, count=3):
+        random_words = [word.word for word in Word.objects.all().order_by('?')[:count]]
+        random_words.remove(self.word.word)
+        random_answers = random_words + [self.word.word]
+        random.shuffle(random_answers)
+        
+        return random_answers

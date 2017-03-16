@@ -22,9 +22,8 @@ def senses(request, word_id='1'):
     context = {}
     
     word = Word.objects.get(id=word_id)
-    if word:
-        context['word'] = word
-        context['senses'] = Sense.objects.filter(word=word.id)
+    context['word'] = word
+    context['senses'] = Sense.objects.filter(word=word.id)
 
     return render(request, 'words/sense.html', context)
 
@@ -35,8 +34,15 @@ def tasks(request, word_id='1'):
     context = {}
 
     word = Word.objects.get(id=word_id)
-    if word:
-        context['word'] = word
-        context['tasks'] = [task.task.replace('\n', '</br>') for task in Task.objects.filter(word=word.id)]
+    tasks = Task.objects.filter(word=word.id)
+    random_answers = [task.get_random_answers() for task in tasks]
+
+    all_tasks = []
+    for task, answers in zip(tasks, random_answers):
+        left_part, right_part = task.task.replace('\r\n', '</br>').split('...')
+        all_tasks.append([left_part, answers, right_part])
+
+    context['word'] = word
+    context['tasks'] = all_tasks
 
     return render(request, 'words/task.html', context)
