@@ -17,13 +17,14 @@
 {% block javascript %}
     <script type="text/javascript">
         function check_answer(right_answer, id) {
+            var line = document.getElementById('line_' + id);
             var answer = document.getElementById('select_' + id).value;
             
             if (answer == right_answer) {
-                alert('Верно!')
+                line.style.background="green";
             }
             else {
-                alert('Не верно!');
+                line.style.background="red";
             }
         }
     </script>
@@ -34,9 +35,10 @@
     <p id="meaning">Упражнения для слова '{{ word.word }}':</p>
     
     {% for id, right_answer, left_part, answers, right_part in tasks %}
-        <div class="line">
+        <div id="line_{{ id }}" class="line">
             {{ left_part|safe }}
             <select id="select_{{ id }}">
+                <option selected="selected"> </option>
                 {% for answer in answers %}
                     <option value="{{ answer }}" onclick="check_answer('{{ right_answer }}', {{ id }});">{{ answer }}</option>
                 {% endfor %}
