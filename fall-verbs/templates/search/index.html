@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Результаты поиска{% endblock %}
+
+
+{% block style %}
+    <style type="text/css">
+        .element_links {
+            padding-left: 2%;
+            text-decoration: none;
+        }
+
+        .element_links:hover {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% if results %}
+        {% for result in results %}
+            <p class="line">
+                {{ result|safe }}
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>Поиск не дал результатов :(</p>
+    {% endif %}
+{% endblock %}

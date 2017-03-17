@@ -41,6 +41,12 @@
             #content {
                 padding: 1%;
             }
+
+            #search {
+                position: absolute;
+                margin-top: -25px;
+                margin-left: 75%;
+            }
         </style>
         {% block style %}{% endblock %}
     </head>
@@ -53,8 +59,12 @@
             <a href="{% url 'words:index' %}" class="element">Список глаголов</a>
             <a href="{% url 'prefs:index' %}" class="element">Список приставок</a>
             <a href="{% url 'classes:index' %}" class="element">Список классов</a>
-
-
+            <div id="search">
+            <form action="{% url 'search:index' %}" method="post">
+                <input type="text" name="query" placeholder="Запрос..."/>
+                <input type="submit" value="Найти" style="height: 35px;"/>
+            </form>
+        </div>
         </div>
         <div id="content">
             {% block content %}{% endblock %}
