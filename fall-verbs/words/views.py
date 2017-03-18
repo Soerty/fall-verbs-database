@@ -4,8 +4,7 @@ from .models import Word
 from .models import Task
 from .models import Sense
 from .models import Example
-
-
+from classes.models import Class
 
 
 def index(request):
@@ -16,17 +15,19 @@ def index(request):
     return render(request, 'words/index.html', context)
 
 
-
-def senses(request, word_id='1'):
+def classes(request, word_id='1'):
     """Представление для отображения всех значений слова"""
     context = {}
     
     word = Word.objects.get(id=word_id)
+
+    classes_all = word.class_name.all()
+
     context['word'] = word
-    context['senses'] = Sense.objects.filter(word=word.id)
+    context['classes_phys'] = classes_all.filter(class_type='физическое')
+    context['classes_meta'] = classes_all.filter(class_type='метафорическое')
 
-    return render(request, 'words/sense.html', context)
-
+    return render(request, 'words/classes.html', context)
 
 
 def tasks(request, word_id='1'):

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Поиск по компонентам класса{% endblock %}
+
+
+{% block style %}
+    <style type="text/css">
+        #meaning {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        var id = 0;
+
+        function add_component() {
+            id += 1;
+            var allComponents = document.getElementById("all_components");
+            var line = document.createElement("div");
+            line.setAttribute("class", "line");
+            line.setAttribute("id", "line_" + id);
+            var innerHTML = "<select><option selected='selected'></option>";
+            innerHTML += "{% for comp in components %}<option value='{{ comp }}'>{{ comp }}</option>{% endfor %}";
+            innerHTML += "</select><input type='button' value='Добавить ещё компонент' onclick='add_component()' style='height: 35px;'/>";
+            innerHTML += "<input type='button' value='Удалить' onclick='delete_component(\"line_" + id + "\")' style='height: 35px;'/>";
+            line.innerHTML = innerHTML;
+            allComponents.appendChild(line);
+        }
+
+        function delete_component(this_id) {
+            var element = document.getElementById(this_id);
+            element.parentNode.removeChild(element);
+        }
+
+        function find_components() {
+            let $select = $("select");
+            let components = [];
+            for (let i = 0; i < $select.length; i++) {
+                if ($($select[i]).val()) {
+                    components.push($($select[i]).val());
+                }
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '/search/_query/',
+                data: JSON.stringify({ 'components': components }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            }).done(function(data) {
+                var results = document.getElementById("results");
+                results.innerHTML = "";
+                console.log(data["classes"]);
+                for (let k = 0; k < data["classes"].length; k++) {
+                    var line = document.createElement("div");
+                    line.setAttribute("class", "line");
+                    line.innerHTML = "<a href='/classes/" + data["classes"][k]["id"] + "/wordlist/' class='element_links'>" + data["classes"][k]["class_name"] + "</a>";
+                    results.appendChild(line);
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    <p id="meaning">Поиск по компонентам класса</p>
+    <div id="all_components">
+        <div class="line" id="line_0">
+            <select>
+                <option selected="selected"> </option>
+                {% for comp in components %}
+                    <option value="{{ comp }}">{{ comp }}</option>
+                {% endfor %}
+            </select>
+            <input type="button" value="Добавить ещё компонент" onclick="add_component()" style="height: 35px;"/>
+        </div>
+    </div>
+    <div class="line">
+        <input type="button" value="Найти" onclick="find_components()" style="height: 35px;"/>
+    </div>
+    <div id="results"></div>
+{% endblock %}

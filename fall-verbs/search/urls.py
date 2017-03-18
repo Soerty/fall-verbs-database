@@ -1,10 +1,10 @@
 from django.conf.urls import url
 
-from .views import index
-
-
+from . import views
 
 app_name = 'search'
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    url(r'^$', views.index, name='index'),
+    url(r'^components/$', views.filter_components, name='components'),
+    url(r'^_query/$', views.query, name='query'),
 ]

@@ -18,7 +18,7 @@
     <p id="meaning">Список слов с приставкой '{{ pref.pref }}':</p>
 
     {% for word in wordlist %}
-     <p class="line"> <a href="{% url 'words:senses' word.id %}" class="element_links">{{ word.word }}</a>
+     <p class="line"> <a href="{% url 'words:classes' word.id %}" class="element_links">{{ word.word }}</a>
             {% endfor %}</p>
 
 {% endblock %}

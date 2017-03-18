@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Список классов слова '{{ word.word }}'{% endblock %}
+
+
+{% block style %}
+    <style type="text/css">
+        #meaning {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+$(function() {
+        $('#phys_button').on('click', function (event) {
+            event.preventDefault();
+            $("#phys_content").toggle();
+            });
+         $('#meta_button').on('click', function (event) {
+            event.preventDefault();
+            $("#meta_content").toggle();
+        });
+    });
+        </script>
+{% endblock %}
+
+{% block content %}
+<p> <a href="" id="phys_button"> Список физических классов слова '{{ word.word }}': </a> </p>  
+<div style="display: none;" id="phys_content">
+    {% for class in classes_phys %}
+<p class="line">{{ class.class_name }}</p>
+    {% endfor %}
+</div>
+
+<p> <a href="" id="meta_button"> Список метафорических классов слова '{{ word.word }}': </a> </p>
+<div style="display: none;" id="meta_content">
+{% for class in classes_meta %}
+<p class="line">{{ class.class_name }}</p>
+    {% endfor %}
+    </div>
+
+{% endblock %}
