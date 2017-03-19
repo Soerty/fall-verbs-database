@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 from .models import Word
 from .models import Task
-from .models import Sense
 from .models import Example
 from classes.models import Class
 
@@ -13,6 +12,12 @@ def index(request):
     context['words'] = Word.objects.all()
 
     return render(request, 'words/index.html', context)
+
+def vocabs(request, word_id='1'):
+    context = {}
+    word = Word.objects.get(id=word_id)
+    context['word'] = word
+    return render(request, 'words/vocabs.html', context)
 
 
 def classes(request, word_id='1'):
@@ -26,6 +31,8 @@ def classes(request, word_id='1'):
     context['word'] = word
     context['classes_phys'] = classes_all.filter(class_type='физическое')
     context['classes_meta'] = classes_all.filter(class_type='метафорическое')
+    for cl in context['classes_phys']:
+        cl.example = Example.objects.filter(word=word).filter(class_name = cl)
 
     return render(request, 'words/classes.html', context)
 

@@ -12,29 +12,31 @@ class Word(models.Model):
     pref = models.ForeignKey(Pref, on_delete=models.CASCADE, blank=True, null=True)
     # class_name = models.ForeignKey(Class, on_delete=models.CASCADE, blank=True, null=True)
     class_name = models.ManyToManyField(Class)
+    vocab = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.word
 
 
-
-class Sense(models.Model):
-    """Значение слова, для одного слова может быть много значений"""
-    word = models.ForeignKey(Word, on_delete=models.CASCADE)
-    sense = models.TextField()
-
-    def __str__(self):
-        return self.sense
-
-    def get_all_examples(self):
-        """Метод возвращает все примеры для данного значения слова"""
-        return Example.objects.filter(sense=self)
+# class Sense(models.Model):
+#     """Значение слова, для одного слова может быть много значений"""
+#     word = models.ForeignKey(Word, on_delete=models.CASCADE)
+#     sense = models.TextField()
+#
+#     def __str__(self):
+#         return self.sense
+#
+#     def get_all_examples(self):
+#         """Метод возвращает все примеры для данного значения слова"""
+#         return Example.objects.filter(sense=self)
 
 
 
 class Example(models.Model):
     """Пример значения слова, для одного значения может быть много примеров"""
-    sense = models.ForeignKey(Sense, on_delete=models.CASCADE)
+    class_name = models.ForeignKey(Class, on_delete=models.CASCADE, blank=True, null=True)
+    word = models.ForeignKey(Word, on_delete=models.CASCADE, blank=True, null=True)
+
     example = models.TextField()
 
     def __str__(self):

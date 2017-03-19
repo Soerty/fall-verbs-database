@@ -7,8 +7,9 @@
 
 {% block style %}
     <style type="text/css">
-        #meaning {
-            text-decoration: underline;
+        .example {
+            font-style: italic;
+
         }
     </style>
 {% endblock %}
@@ -30,18 +31,21 @@ $(function() {
 {% endblock %}
 
 {% block content %}
-<p> <a href="" id="phys_button"> Список физических классов слова '{{ word.word }}': </a> </p>  
+<a href="" id="phys_button"> Список физических классов слова '{{ word.word }}': </a>
 <div style="display: none;" id="phys_content">
     {% for class in classes_phys %}
-<p class="line">{{ class.class_name }}</p>
+<p class="line">{{ class.class_name }}
+    {% for example in class.example %} <span class="example"><span style="display:inline-block; width: 40px;"></span>{{ example }}</span> </p>
+    {% endfor %}
     {% endfor %}
 </div>
 
 <p> <a href="" id="meta_button"> Список метафорических классов слова '{{ word.word }}': </a> </p>
 <div style="display: none;" id="meta_content">
 {% for class in classes_meta %}
-<p class="line">{{ class.class_name }}</p>
+<p class="line">{{ class.class_name }}
+    {% for example in class.example %} <span class="example">{{ example }}</span> </p>
+    {% endfor %}
     {% endfor %}
     </div>
-
 {% endblock %}

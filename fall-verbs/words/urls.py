@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^(?P<word_id>[0-9]+)/classes/$', views.classes, name='classes'),
     url(r'^(?P<word_id>[0-9]+)/tasks/$', views.tasks, name='tasks'),
+    url(r'^(?P<word_id>[0-9]+)/vocab/$', views.vocabs, name='vocab'),
+
 ]

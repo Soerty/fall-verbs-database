@@ -6,7 +6,6 @@ from django.http import JsonResponse
 import json
 
 from words.models import Word
-from words.models import Sense
 from words.models import Example
 from words.models import Task
 from prefs.models import Pref

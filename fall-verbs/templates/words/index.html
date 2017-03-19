@@ -26,6 +26,8 @@
                 <span>{{ word.word }}</span>
                 <a href="{% url 'words:classes' word.id %}" class="element_links">классы</a>
                 <a href="{% url 'words:tasks' word.id %}" class="element_links">задания</a>
+                <a href="{% url 'words:vocab' word.id %}" class="element_links">определение по словарю</a>
+
             </p>
         {% endfor %}
     {% endif %}
