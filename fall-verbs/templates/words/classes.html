@@ -31,7 +31,7 @@ $(function() {
 {% endblock %}
 
 {% block content %}
-<a href="" id="phys_button"> Список физических классов слова '{{ word.word }}': </a>
+<a href="" id="phys_button"> Классы физических значений слова '{{ word.word }}': </a>
 <div style="display: none;" id="phys_content">
     {% for class in classes_phys %}
 <p class="line">{{ class.class_name }}
@@ -40,7 +40,7 @@ $(function() {
     {% endfor %}
 </div>
 
-<p> <a href="" id="meta_button"> Список метафорических классов слова '{{ word.word }}': </a> </p>
+<p> <a href="" id="meta_button"> Классы метафорических значений слова '{{ word.word }}': </a> </p>
 <div style="display: none;" id="meta_content">
 {% for class in classes_meta %}
 <p class="line">{{ class.class_name }}
