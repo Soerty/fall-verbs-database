@@ -44,7 +44,7 @@ $(function() {
 <div style="display: none;" id="meta_content">
 {% for class in classes_meta %}
 <p class="line">{{ class.class_name }}
-    {% for example in class.example %} <span class="example">{{ example }}</span> </p>
+    {% for example in class.example %} <span class="example"><span style="display:inline-block; width: 40px;"></span>{{ example }}</span> </p>
     {% endfor %}
     {% endfor %}
     </div>

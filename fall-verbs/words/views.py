@@ -33,7 +33,8 @@ def classes(request, word_id='1'):
     context['classes_meta'] = classes_all.filter(class_type='метафорическое')
     for cl in context['classes_phys']:
         cl.example = Example.objects.filter(word=word).filter(class_name = cl)
-
+    for cl in context['classes_meta']:
+        cl.example = Example.objects.filter(word=word).filter(class_name = cl)
     return render(request, 'words/classes.html', context)
 
 
