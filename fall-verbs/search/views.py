@@ -24,7 +24,6 @@ def index(request):
         words = Word.objects.all()
         prefs = Pref.objects.all()
         classes = Class.objects.all()
-        senses = Sense.objects.all()
         examples = Example.objects.all()
         tasks = Task.objects.all()
 
@@ -40,9 +39,6 @@ def index(request):
             if query in _class.class_name:
                 context['results'].append('Класс: <a href="/classes/%d/wordlist/">%s</a>' % (_class.id, _class.class_name))
 
-        for sense in senses:
-            if query in sense.sense.lower():
-                context['results'].append('Значение: <a href="/words/%d/classes/">%s</a>' % (sense.id, sense.sense))
 
         for example in examples:
             if query in example.example.lower():

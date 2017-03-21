@@ -31,21 +31,24 @@ $(function() {
 {% endblock %}
 
 {% block content %}
-<a href="" id="phys_button"> Классы физических значений слова '{{ word.word }}': </a>
-<div style="display: none;" id="phys_content">
-    {% for class in classes_phys %}
-<p class="line">{{ class.class_name }}
-    {% for example in class.example %} <span class="example"><span style="display:inline-block; width: 40px;"></span>{{ example }}</span> </p>
-    {% endfor %}
-    {% endfor %}
-</div>
-
-<p> <a href="" id="meta_button"> Классы метафорических значений слова '{{ word.word }}': </a> </p>
-<div style="display: none;" id="meta_content">
-{% for class in classes_meta %}
-<p class="line">{{ class.class_name }}
-    {% for example in class.example %} <span class="example"><span style="display:inline-block; width: 40px;"></span>{{ example }}</span> </p>
-    {% endfor %}
-    {% endfor %}
+    <a href="" id="phys_button"> Классы физических значений слова '{{ word.word }}': </a>
+    <div style="display: none;" id="phys_content">
+        {% for class in classes_phys %}
+    <p class="line">{{ class.class_name }}
+        {% for example in class.example %} <span class="example"><span style="display:inline-block; width: 40px;"></span>{{ example }}</span> </p>
+        {% endfor %}
+        {% endfor %}
     </div>
+
+    <p> <a href="" id="meta_button"> Классы метафорических значений слова '{{ word.word }}': </a> </p>
+        <div style="display: none;" id="meta_content">
+            {% for class in classes_meta %}
+                <p class="line">
+                    {{ class.class_name }}
+                    {% for example in class.example %}
+                        <span class="example"><span style="display:inline-block; width: 40px;"></span>{{ example }} </span>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+        </div>
 {% endblock %}

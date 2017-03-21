@@ -55,7 +55,8 @@ class Task(models.Model):
 
     def get_random_answers(self, count=3):
         random_words = [word.word for word in Word.objects.all().order_by('?')[:count]]
-        random_words.remove(self.word.word)
+        if self.word.word in random_words:
+            random_words.remove(self.word.word)
         random_answers = random_words + [self.word.word]
         random.shuffle(random_answers)
         
