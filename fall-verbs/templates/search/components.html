@@ -17,6 +17,35 @@
 {% block javascript %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript">
+        var exists = [];
+        function select_component(component, line) {
+            if (exists.indexOf(line) == -1) {
+                exists.push(line);
+
+                $.ajax({
+                    type: 'post',
+                    url: '/search/_query/',
+                    data: JSON.stringify({ 'components': [component] }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    }).done(function(data) {
+                        var div = document.getElementById(line);
+                        div.appendChild(document.createElement("br"));
+                        var select = document.createElement("select");
+                        
+                        for (let i = 0; i < data["classes"].length; i++) {
+                            console.log(data["classes"][i]["class_name"]);
+                            var option = document.createElement("option");
+                            option.setAttribute("value", data["classes"][i]["class_name"]);
+                            option.innerHTML = data["classes"][i]["class_name"];
+                            select.appendChild(option);
+                        }
+                        div.appendChild(select);
+                    });
+            }
+        }
+
+
         var id = 0;
 
         function add_component() {
@@ -26,7 +55,7 @@
             line.setAttribute("class", "line");
             line.setAttribute("id", "line_" + id);
             var innerHTML = "<select><option selected='selected'></option>";
-            innerHTML += "{% for comp in components %}<option value='{{ comp }}'>{{ comp }}</option>{% endfor %}";
+            innerHTML += "{% for comp in components %}<option value='{{ comp }}' onClick='select_component(\"{{ comp }}\", \"line_"+id+"\")')'>{{ comp }}</option>{% endfor %}";
             innerHTML += "</select><input type='button' value='Добавить ещё компонент' onclick='add_component()' style='height: 35px;'/>";
             innerHTML += "<input type='button' value='Удалить' onclick='delete_component(\"line_" + id + "\")' style='height: 35px;'/>";
             line.innerHTML = innerHTML;
@@ -76,7 +105,7 @@
             <select>
                 <option selected="selected"> </option>
                 {% for comp in components %}
-                    <option value="{{ comp }}">{{ comp }}</option>
+                    <option value="{{ comp }}" onClick="select_component('{{ comp }}', 'line_0')">{{ comp }}</option>
                 {% endfor %}
             </select>
             <input type="button" value="Добавить ещё компонент" onclick="add_component()" style="height: 35px;"/>
