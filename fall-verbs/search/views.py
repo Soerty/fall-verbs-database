@@ -10,6 +10,7 @@ from words.models import Example
 from words.models import Task
 from prefs.models import Pref
 from classes.models import Class
+from classes.models import SuperClass
 from classes.models import Component
 
 
@@ -55,7 +56,7 @@ def index(request):
 
 def filter_components(request):
     context = {}
-    context['components'] = Component.objects.all()
+    context['components'] = SuperClass.objects.all()
 
     return render(request, 'search/components.html', context)
 
@@ -65,10 +66,8 @@ def filter_components(request):
 def query(request):
     data = json.loads(request.body.decode('utf-8'))
 
-    components = Component.objects.filter(component__in=data['components'])
-    classes = Class.objects.filter(components=components)
-    for component in components:
-        classes = classes.filter(components=component)
+    superclasses = SuperClass.objects.filter(class_name=data['components'][0])
+    classes = Class.objects.filter(superclass=superclasses)
 
     result = {'classes': []}
 
@@ -77,5 +76,8 @@ def query(request):
             'id': cl.id,
             'class_name': cl.class_name
         })
+
+    if not result['classes']:
+        result['classes'] = ['-']
 
     return JsonResponse(result)
